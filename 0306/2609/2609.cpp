@@ -1,27 +1,14 @@
 #include <iostream>
-
 using namespace std;
 
-int main()
-{
-	int x, y, z;
-	int gcm = 0;
-	int lcm = 0;
-	cin >> x >> y;
+// 최대공약수 구하기
 
-	if (x < y) z = x;
-	else z = y;
 
-	for (int i = 2; i <= z; i++)
-	{
-		if (x % i == 0 && y % i == 0)
-		{
-			gcm = i;
-			lcm = x * y / i;
-		}
-	}
+// 최소공배수 구하기
 
-	cout << gcm << '\n' << lcm << '\n';
 
-	return 0;
+int main() {
+	int n1, n2;
+	cin >> n1 >> n2;
+	cout << gcd(n1, n2) << "\n" << lcm(n1, n2) << '\n';
 }

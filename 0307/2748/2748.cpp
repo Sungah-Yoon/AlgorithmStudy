@@ -1,20 +1,19 @@
 #include <iostream>
-
 using namespace std;
 
-// 문제 case에서 num이 90 이하의 자연수 이므로 90에 가까울수록 결과값은 매우 큰 수
-// 따라서 int 자료형이 아닌 long long을 써주어야 함
-long long Fibonacci(int num)
+long long fiboarr[100] = { 0,1, };
+
+long long fibo(int N)
 {
-	if (num <= 1) return num;
-	return Fibonacci(num - 1) + Fibonacci(num - 2);
+    if (N == 0 || N == 1)
+        return fiboarr[N];
+    else if (fiboarr[N] == 0)
+        fiboarr[N] = fibo(N - 1) + fibo(N - 2);
+    return fiboarr[N];
 }
 
-int main()
-{
-	int n; cin >> n;
-
-	cout << Fibonacci(n) << '\n';
-
-	return 0;
+int main() {
+    int n;
+    cin >> n;
+    cout << fibo(n);
 }

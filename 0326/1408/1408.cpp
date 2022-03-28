@@ -1,33 +1,66 @@
 #include <iostream>
-
+#include <string>
 using namespace std;
+
+struct Time
+{
+	int hour;
+	int minute;
+	int second;
+};
+
+Time setTime(string time)
+{
+	return Time{
+		stoi(time.substr(0,2)),
+		stoi(time.substr(3,2)),
+		stoi(time.substr(6,2))
+	};
+}
+
+void printTime(Time time)
+{
+	string hour = to_string(time.hour);
+	string minute = to_string(time.minute);
+	string second = to_string(time.second);
+
+	hour = hour.length() == 1 ? '0' + hour : hour;
+	minute = minute.length() == 1 ? '0' + minute : minute;
+	second = second.length() == 1 ? '0' + second : second;
+
+	cout << hour << ":" << minute << ":" << second << "\n";
+}
 
 int main()
 {
-	int h1, m1, s1;
-	int h2, m2, s2;
-	int h3, m3, s3;
+	string nowTime, startTime;
+	cin >> nowTime >> startTime;
 
-	if (h1 > h2)
+	Time now = setTime(nowTime);
+	Time start = setTime(startTime);
+	Time result;
+
+
+	if (now.hour > start.hour)
 	{
-		h2 += 24;
+		start.hour += 24;
 	}
-	if (m1 > m2)
+	if (now.minute > start.minute)
 	{
-		h2 -= 1;
-		m2 += 60;
+		start.hour--;
+		start.minute += 60;
 	}
-	if (s1 > s2)
+	if (now.second > start.second)
 	{
-		m2 -= 1;
-		s2 += 60;
+		start.minute--;
+		start.second += 60;
 	}
 
-	h3 = h2 - h1;
-	m3 = m2 - m1;
-	s3 = s2 - s1;
+	result.hour = start.hour - now.hour;
+	result.minute = start.minute - now.minute;
+	result.second= start.second - now.second;
 
-	cout << h3 << m3 << s3;
+	printTime(result);
 
 	return 0;
 }
